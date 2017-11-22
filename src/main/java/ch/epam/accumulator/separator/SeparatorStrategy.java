@@ -7,9 +7,10 @@ public interface SeparatorStrategy {
 
     List<String> separate();
 
-    Predicate<String> CUSTOM_DELIMITER = (s) -> s.startsWith("//");
+    String CUSTOM_DELIMITER_PREFIX = "//";
+    Predicate<String> CUSTOM_DELIMITER_CHECK = (s) -> s.startsWith(CUSTOM_DELIMITER_PREFIX);
 
     static SeparatorStrategy of(String value) {
-        return CUSTOM_DELIMITER.test(value) ? new CustomSeparatorStrategy(value) : new DefaultSeparatorStrategy(value);
+        return CUSTOM_DELIMITER_CHECK.test(value) ? new CustomSeparatorStrategy(value) : new DefaultSeparatorStrategy(value);
     }
 }

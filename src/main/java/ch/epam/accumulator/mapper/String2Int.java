@@ -1,24 +1,25 @@
 package ch.epam.accumulator.mapper;
 
+import java.math.BigInteger;
+import java.util.function.Function;
 import java.util.function.Predicate;
-import java.util.function.ToIntFunction;
 
-public class String2Int implements ToIntFunction<String> {
+public class String2Int implements Function<String, BigInteger> {
 
     private static final Predicate<String> INVALID_STRING = ""::equals;
-    private static final Predicate<Integer> INVALID_NUMBER = (n) -> n > 1000;
-    private String2Int (){}
+    private static final Predicate<BigInteger> INVALID_NUMBER = (n) -> n.intValue() > 1000;
     public static String2Int of() {
         return new String2Int();
     }
+    private String2Int (){}
 
     @Override
-    public int applyAsInt(String value) {
+    public BigInteger apply(String value) {
         if (INVALID_STRING.test(value)) {
-            return 0;
+            return BigInteger.ZERO;
         } else {
-            int result = Integer.parseInt(value);
-            return INVALID_NUMBER.test(result) ? 0 : result;
+            BigInteger result = new BigInteger(value);
+            return INVALID_NUMBER.test(result) ? BigInteger.ZERO : result;
         }
     }
 }

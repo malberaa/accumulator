@@ -6,7 +6,6 @@ import java.util.List;
 public class DefaultSeparatorStrategy implements SeparatorStrategy {
 
     private static final String DEFAULT_DELIMITER = ",";
-
     private final String value;
     DefaultSeparatorStrategy(String value) {
         this.value = value;
